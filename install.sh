@@ -13,9 +13,14 @@ if [ -z "$CLOUDSDK_PYTHON" ]; then
     echo "to the location of your Python executable."
     exit 1
   fi
-  CLOUDSDK_PYTHON="python"
+  # If python2 exists then plain python may point to a version != 2
+  # So, use python2
+  if which python2 >/dev/null; then
+    CLOUDSDK_PYTHON=python2
+  else
+    CLOUDSDK_PYTHON=python
+  fi
 fi
-
 
 # <cloud-sdk-sh-preamble>
 #
